@@ -2,19 +2,23 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      <span>{{ textMsg }} {{ incrementMsg }}</span>
-      <button type="button" @click="incrementClick">increment click</button>
+      <span>userStatus: {{ userStatusView }} <br/>userData: {{ userDataView }}</span><br/>
+      <button type="button" @click="loginClick">Login user</button><br/>
+      <button type="button" @click="logoutClick">Logou user</button>
     </p>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import {
+  UserData,
+  UserStatus,
+} from '@/types';
 
 interface Num1 {
   num: number;
 }
-
 @Component({
   components: {},
   props: {
@@ -27,20 +31,21 @@ interface Num1 {
 export default class HelloWorld extends Vue {
   msg!: string;
 
-  num1: Num1 = { num: 10 };
-
-  get incrementMsg(): number {
-    return this.$store.getters.counter;
+  loginClick() {
+    this.$store.dispatch('loginUser', { id: 'idUser', name: 'nameUser', email: 'emailUser' });
   }
 
-  get textMsg(): string {
-    return this.$store.getters.message;
+  logoutClick() {
+    this.$store.dispatch('logoutUser');
   }
 
-  incrementClick() {
-    debugger;
-    const { num } = this.num1;
-    this.$store.dispatch('increment', { num });
+  get userStatusView(): UserStatus {
+    return this.$store.getters.userStatus;
+  }
+
+  get userDataView(): string {
+    const { id, name, email } = this.$store.getters.userData;
+    return `id: ${id} name: ${name} email: ${email}`;
   }
 }
 </script>

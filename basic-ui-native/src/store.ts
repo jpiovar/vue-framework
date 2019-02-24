@@ -1,33 +1,54 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {
+  UserData,
+  UserStatus,
+  INITIAL,
+  LOGGED_IN,
+  LOGGED_OUT,
+} from '@/types';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    msg: {
-      message: 'hello vuex',
-      count: 0,
+    user: {
+      userData: { id: '', name: '', email: '' },
+      userStatus: INITIAL,
     },
   },
   mutations: {
-    increment(state, payload) {
-      debugger;
-      state.msg.count += payload;
+    loginUser(state, payload: UserData) {
+      const { id, name, email }: UserData = payload;
+      const userStatus: UserStatus = LOGGED_IN;
+      state.user = {
+        userData: { id, name, email },
+        userStatus,
+      };
+    },
+    logoutUser(state) {
+      const userData: UserData = { id: '', name: '', email: '' };
+      const userStatus: UserStatus = LOGGED_OUT;
+      state.user = {
+        userData,
+        userStatus,
+      };
     },
   },
   actions: {
-    increment(state, { num }: { num: number }) {
-      debugger;
-      state.commit('increment', num);
+    loginUser(state, { id, name, email }: UserData) {
+      state.commit('loginUser', { id, name, email });
+    },
+    logoutUser(state) {
+      state.commit('logoutUser');
     },
   },
   getters: {
-    message(state) {
-      return state.msg.message;
+    userData(state): UserData {
+      return state.user.userData;
     },
-    counter(state) {
-      return state.msg.count;
+    userStatus(state): UserStatus|string {
+      return state.user.userStatus;
     },
   },
 });
