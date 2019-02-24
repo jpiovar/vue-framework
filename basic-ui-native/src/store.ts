@@ -5,27 +5,29 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    message: 'hello vuex',
-    count: 0,
+    msg: {
+      message: 'hello vuex',
+      count: 0,
+    },
   },
   mutations: {
     increment(state, payload) {
       debugger;
-      state.count += payload;
+      state.msg.count += payload;
     },
   },
   actions: {
-    increment(state, payload) {
+    increment(state, { num }: { num: number }) {
       debugger;
-      state.commit('increment', payload);
+      state.commit('increment', num);
     },
   },
   getters: {
     message(state) {
-      return state.message;
+      return state.msg.message;
     },
     counter(state) {
-      return state.count;
+      return state.msg.count;
     },
   },
 });

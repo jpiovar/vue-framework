@@ -11,6 +11,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+interface Num1 {
+  num: number;
+}
+
 @Component({
   components: {},
   props: {
@@ -23,6 +27,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class HelloWorld extends Vue {
   msg!: string;
 
+  num1: Num1 = { num: 10 };
+
   get incrementMsg(): number {
     return this.$store.getters.counter;
   }
@@ -33,7 +39,8 @@ export default class HelloWorld extends Vue {
 
   incrementClick() {
     debugger;
-    this.$store.dispatch('increment', 10);
+    const { num } = this.num1;
+    this.$store.dispatch('increment', { num });
   }
 }
 </script>
