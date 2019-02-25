@@ -2,9 +2,10 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
+      Username: <input type="text" v-model="nameUser"/>{{ nameUser }}<br/><br/>
       <span>userStatus: {{ userStatusView }} <br/>userData: {{ userDataView }}</span><br/>
       <button type="button" @click="loginClick">Login user</button><br/>
-      <button type="button" @click="logoutClick">Logou user</button>
+      <button type="button" @click="logoutClick">Logout user</button>
     </p>
   </div>
 </template>
@@ -16,9 +17,6 @@ import {
   UserStatus,
 } from '@/types';
 
-interface Num1 {
-  num: number;
-}
 @Component({
   components: {},
   props: {
@@ -31,8 +29,10 @@ interface Num1 {
 export default class HelloWorld extends Vue {
   msg!: string;
 
+  nameUser: string = '';
+
   loginClick() {
-    this.$store.dispatch('loginUser', { id: 'idUser', name: 'nameUser', email: 'emailUser' });
+    this.$store.dispatch('loginUser', { id: 'idUser', name: this.nameUser, email: 'emailUser' });
   }
 
   logoutClick() {
