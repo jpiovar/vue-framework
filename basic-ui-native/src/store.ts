@@ -6,6 +6,7 @@ import {
   INITIAL,
   LOGGED_IN,
   LOGGED_OUT,
+  USER_DATA_EMPTY,
 } from '@/types';
 
 Vue.use(Vuex);
@@ -13,42 +14,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
-      userData: { id: '', name: '', email: '' },
+      userData: USER_DATA_EMPTY,
       userStatus: INITIAL,
     },
   },
   mutations: {
-    loginUser(state, payload: UserData) {
-      const { id, name, email }: UserData = payload;
-      const userStatus: UserStatus = LOGGED_IN;
-      state.user = {
-        userData: { id, name, email },
-        userStatus,
-      };
-    },
-    logoutUser(state) {
-      const userData: UserData = { id: '', name: '', email: '' };
-      const userStatus: UserStatus = LOGGED_OUT;
-      state.user = {
-        userData,
-        userStatus,
-      };
-    },
+    
   },
   actions: {
-    loginUser(state, { id, name, email }: UserData) {
-      state.commit('loginUser', { id, name, email });
-    },
-    logoutUser(state) {
-      state.commit('logoutUser');
-    },
-  },
-  getters: {
-    userData(state): UserData {
-      return state.user.userData;
-    },
-    userStatus(state): UserStatus|string {
-      return state.user.userStatus;
-    },
+    
   },
 });
