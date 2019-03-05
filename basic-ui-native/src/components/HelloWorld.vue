@@ -27,7 +27,7 @@ import {
   },
 })
 export default class HelloWorld extends Vue {
-  msg!: string;
+  private msg!: string;
 
   nameUser: string = '';
 
