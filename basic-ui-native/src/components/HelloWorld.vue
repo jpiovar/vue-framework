@@ -29,7 +29,7 @@ import {
 export default class HelloWorld extends Vue {
   private msg!: string;
 
-  nameUser: string = '';
+  private nameUser: string = '';
 
   loginClick() {
     this.$store.dispatch('loginUser', { id: 'idUser', name: this.nameUser, email: 'emailUser' });
@@ -50,7 +50,6 @@ export default class HelloWorld extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h1 {
   margin: 40px 0 0;
