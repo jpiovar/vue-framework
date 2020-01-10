@@ -103,6 +103,7 @@ export default class Main extends Vue {
 
   created() {
     this.loadJournalFilterItems();
+    this.loadJournalItems();
   }
 
   get userStatusView(): any {
@@ -158,7 +159,7 @@ export default class Main extends Vue {
 
   loadJournalItems() {
     debugger;
-    httpService.getDirect(this.generateUrl).then((response) => {
+    Vue.axios.get(this.generateUrl).then((response) => {
     // httpMockService.getMockJournalDelay().then((response) => {
       this.itemsJournalFiltered = response.data;
     }, (error) => {
