@@ -159,9 +159,9 @@ export default class Main extends Vue {
 
   loadJournalItems() {
     debugger;
-    Vue.axios.get(this.generateUrl).then((response) => {
-    // httpMockService.getMockJournalDelay().then((response) => {
-      this.itemsJournalFiltered = response.data;
+    // Vue.axios.get(this.generateUrl).then((response) => {
+    httpMockService.getMockJournalDelay().then((response) => {
+      this.itemsJournalFiltered = response;
       console.log(this.itemsJournalFiltered);
     }, (error) => {
       console.log('error ', error);
